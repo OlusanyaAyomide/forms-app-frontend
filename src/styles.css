@@ -20,6 +20,12 @@ code {
 
 :root {
   --background: oklch(1 0 0);
+  --main: #690896;
+  --main-hover: #310445;
+  --asc-black: #000000;
+  --asc-gray: #48464C;
+  --asc-black-hover: #334155;
+  --asc-error: #B3261E;
   --foreground: oklch(0.141 0.005 285.823);
   --card: oklch(1 0 0);
   --card-foreground: oklch(0.141 0.005 285.823);
@@ -55,6 +61,12 @@ code {
 }
 
 .dark {
+  --main: #690896;
+  --main-hover: #310445;
+  --asc-black: #000000;
+  --asc-gray: #48464C;
+  --asc-black-hover: #334155;
+  --asc-error: #B3261E;
   --background: oklch(0.141 0.005 285.823);
   --foreground: oklch(0.985 0 0);
   --card: oklch(0.141 0.005 285.823);
@@ -90,6 +102,12 @@ code {
 }
 
 @theme inline {
+  --color-main: var(--main);
+  --color-main-hover: var(--main-hover);
+  --color-asc-black: var(--asc-black);
+  --color-asc-gray: var(--asc-gray);
+  --color-asc-black-hover: var(--asc-black-hover);
+  --color-asc-error: var(--asc-error);
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-card: var(--card);
@@ -132,6 +150,7 @@ code {
   * {
     @apply border-border outline-ring/50;
   }
+
   body {
     @apply bg-background text-foreground;
   }
