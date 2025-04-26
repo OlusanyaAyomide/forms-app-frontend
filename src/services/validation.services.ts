@@ -106,7 +106,7 @@ export function isValidCreditCard(value: string): boolean {
   let sum = 0;
   let shouldDouble = false;
 
-  // eslint-disable-next-line no-plusplus
+   
   for (let i = sanitized.length - 1; i >= 0; i--) {
     let digit = parseInt(sanitized[i], 10);
 

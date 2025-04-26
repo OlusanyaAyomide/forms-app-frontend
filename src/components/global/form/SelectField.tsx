@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import type {
-  FieldValues, UseFormSetValue, Path, PathValue,
+  FieldValues, Path, PathValue, UseFormSetValue,
 } from 'react-hook-form';
 
 import {
@@ -17,7 +17,7 @@ type SelectFieldType<T extends FieldValues> = {
   error?: string;
   disabled?: boolean
   selectName: Path<T>;
-  options: SelectOption[]
+  options: Array<SelectOption>
   labelText: string;
   setValue: UseFormSetValue<T>; // The function to set the value of the select field
   value: string | number; // The current value of the select field
@@ -57,7 +57,7 @@ export default function SelectField<T extends FieldValues>({
       <Select
         name={selectName}
         disabled={disabled}
-        value={value?.toString()}
+        value={value.toString()}
         // Handler for when the select box is opened or closed
         onOpenChange={(isOpened) => { setIsFocused(isOpened); }}
         // Handler for when a value is selected, setting the form value
@@ -86,7 +86,7 @@ export default function SelectField<T extends FieldValues>({
           {/* Display the selected value, if any */}
           <SelectValue placeholder={showPlaceholder ? labelText : ' '}>
             {
-              // eslint-disable-next-line no-nested-ternary
+               
               value ? (
                 <span className="absolute left-[18px] top-3 text-normal font-light">
                   {

@@ -1,8 +1,8 @@
 import type { FieldValues, Path, UseFormRegister } from 'react-hook-form';
 
+import type { InputType } from '@/types/GenericTypes';
 import { cn } from '@/lib/utils';
 import SvgIcons from '@/icons/SvgIcons';
-import type { InputType } from '@/types/GenericTypes';
 import { Input } from '@/components/ui/input';
 import '@/components/global/form/input-field-style.css';
 

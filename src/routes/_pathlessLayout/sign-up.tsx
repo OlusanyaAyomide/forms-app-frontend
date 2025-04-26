@@ -1,15 +1,15 @@
 import { useState } from 'react';
-import { createFileRoute, Link } from '@tanstack/react-router';
+import { Link, createFileRoute } from '@tanstack/react-router';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
-import * as yup from 'yup';
+import { ArrowLeft } from 'lucide-react';
+import { toast } from 'sonner';
+import type * as yup from 'yup';
 
 import InputField from '@/components/global/form/InputField';
 import SelectField from '@/components/global/form/SelectField';
 import { Button } from '@/components/ui/button';
 import { signUpSchema } from '@/validation/auth.validation';
-import { ArrowLeft } from 'lucide-react';
-import { toast } from 'sonner';
 import CloseToast from '@/components/global/CloseToast';
 import { slugifyCompanyName } from '@/services/TextServices';
 import useWindowProperties from '@/hooks/useWindowProperties';

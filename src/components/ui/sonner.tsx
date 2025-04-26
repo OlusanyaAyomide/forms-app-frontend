@@ -2,8 +2,8 @@
 
 import { useTheme } from "next-themes";
 import { Toaster as Sonner } from "sonner";
-import type { ToasterProps } from "sonner";
 import { BadgeInfo } from "lucide-react";
+import type { ToasterProps } from "sonner";
 import SvgIcons from "@/icons/SvgIcons";
 
 import { TOAST_DURATION_IN_MS } from "@/static/Constants";
