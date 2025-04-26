@@ -13,10 +13,13 @@
 import { Route as rootRoute } from './routes/__root'
 import { Route as CompanyRouteImport } from './routes/company/route'
 import { Route as PathlessLayoutRouteImport } from './routes/_pathlessLayout/route'
+import { Route as WorkspaceRouteImport } from './routes/$workspace/route'
 import { Route as IndexImport } from './routes/index'
 import { Route as DemoTanstackQueryImport } from './routes/demo.tanstack-query'
 import { Route as CompanyDashboardImport } from './routes/company/dashboard'
 import { Route as PathlessLayoutSignUpImport } from './routes/_pathlessLayout/sign-up'
+import { Route as PathlessLayoutLogInImport } from './routes/_pathlessLayout/log-in'
+import { Route as WorkspaceDashboardImport } from './routes/$workspace/dashboard'
 
 // Create/Update Routes
 
@@ -28,6 +31,12 @@ const CompanyRouteRoute = CompanyRouteImport.update({
 
 const PathlessLayoutRouteRoute = PathlessLayoutRouteImport.update({
   id: '/_pathlessLayout',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const WorkspaceRouteRoute = WorkspaceRouteImport.update({
+  id: '/$workspace',
+  path: '/$workspace',
   getParentRoute: () => rootRoute,
 } as any)
 
@@ -55,6 +64,18 @@ const PathlessLayoutSignUpRoute = PathlessLayoutSignUpImport.update({
   getParentRoute: () => PathlessLayoutRouteRoute,
 } as any)
 
+const PathlessLayoutLogInRoute = PathlessLayoutLogInImport.update({
+  id: '/log-in',
+  path: '/log-in',
+  getParentRoute: () => PathlessLayoutRouteRoute,
+} as any)
+
+const WorkspaceDashboardRoute = WorkspaceDashboardImport.update({
+  id: '/dashboard',
+  path: '/dashboard',
+  getParentRoute: () => WorkspaceRouteRoute,
+} as any)
+
 // Populate the FileRoutesByPath interface
 
 declare module '@tanstack/react-router' {
@@ -64,6 +85,13 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexImport
+      parentRoute: typeof rootRoute
+    }
+    '/$workspace': {
+      id: '/$workspace'
+      path: '/$workspace'
+      fullPath: '/$workspace'
+      preLoaderRoute: typeof WorkspaceRouteImport
       parentRoute: typeof rootRoute
     }
     '/_pathlessLayout': {
@@ -79,6 +107,20 @@ declare module '@tanstack/react-router' {
       fullPath: '/company'
       preLoaderRoute: typeof CompanyRouteImport
       parentRoute: typeof rootRoute
+    }
+    '/$workspace/dashboard': {
+      id: '/$workspace/dashboard'
+      path: '/dashboard'
+      fullPath: '/$workspace/dashboard'
+      preLoaderRoute: typeof WorkspaceDashboardImport
+      parentRoute: typeof WorkspaceRouteImport
+    }
+    '/_pathlessLayout/log-in': {
+      id: '/_pathlessLayout/log-in'
+      path: '/log-in'
+      fullPath: '/log-in'
+      preLoaderRoute: typeof PathlessLayoutLogInImport
+      parentRoute: typeof PathlessLayoutRouteImport
     }
     '/_pathlessLayout/sign-up': {
       id: '/_pathlessLayout/sign-up'
@@ -106,11 +148,25 @@ declare module '@tanstack/react-router' {
 
 // Create and export the route tree
 
+interface WorkspaceRouteRouteChildren {
+  WorkspaceDashboardRoute: typeof WorkspaceDashboardRoute
+}
+
+const WorkspaceRouteRouteChildren: WorkspaceRouteRouteChildren = {
+  WorkspaceDashboardRoute: WorkspaceDashboardRoute,
+}
+
+const WorkspaceRouteRouteWithChildren = WorkspaceRouteRoute._addFileChildren(
+  WorkspaceRouteRouteChildren,
+)
+
 interface PathlessLayoutRouteRouteChildren {
+  PathlessLayoutLogInRoute: typeof PathlessLayoutLogInRoute
   PathlessLayoutSignUpRoute: typeof PathlessLayoutSignUpRoute
 }
 
 const PathlessLayoutRouteRouteChildren: PathlessLayoutRouteRouteChildren = {
+  PathlessLayoutLogInRoute: PathlessLayoutLogInRoute,
   PathlessLayoutSignUpRoute: PathlessLayoutSignUpRoute,
 }
 
@@ -131,8 +187,11 @@ const CompanyRouteRouteWithChildren = CompanyRouteRoute._addFileChildren(
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/$workspace': typeof WorkspaceRouteRouteWithChildren
   '': typeof PathlessLayoutRouteRouteWithChildren
   '/company': typeof CompanyRouteRouteWithChildren
+  '/$workspace/dashboard': typeof WorkspaceDashboardRoute
+  '/log-in': typeof PathlessLayoutLogInRoute
   '/sign-up': typeof PathlessLayoutSignUpRoute
   '/company/dashboard': typeof CompanyDashboardRoute
   '/demo/tanstack-query': typeof DemoTanstackQueryRoute
@@ -140,8 +199,11 @@ export interface FileRoutesByFullPath {
 
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/$workspace': typeof WorkspaceRouteRouteWithChildren
   '': typeof PathlessLayoutRouteRouteWithChildren
   '/company': typeof CompanyRouteRouteWithChildren
+  '/$workspace/dashboard': typeof WorkspaceDashboardRoute
+  '/log-in': typeof PathlessLayoutLogInRoute
   '/sign-up': typeof PathlessLayoutSignUpRoute
   '/company/dashboard': typeof CompanyDashboardRoute
   '/demo/tanstack-query': typeof DemoTanstackQueryRoute
@@ -150,8 +212,11 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRoute
   '/': typeof IndexRoute
+  '/$workspace': typeof WorkspaceRouteRouteWithChildren
   '/_pathlessLayout': typeof PathlessLayoutRouteRouteWithChildren
   '/company': typeof CompanyRouteRouteWithChildren
+  '/$workspace/dashboard': typeof WorkspaceDashboardRoute
+  '/_pathlessLayout/log-in': typeof PathlessLayoutLogInRoute
   '/_pathlessLayout/sign-up': typeof PathlessLayoutSignUpRoute
   '/company/dashboard': typeof CompanyDashboardRoute
   '/demo/tanstack-query': typeof DemoTanstackQueryRoute
@@ -161,24 +226,33 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/$workspace'
     | ''
     | '/company'
+    | '/$workspace/dashboard'
+    | '/log-in'
     | '/sign-up'
     | '/company/dashboard'
     | '/demo/tanstack-query'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/$workspace'
     | ''
     | '/company'
+    | '/$workspace/dashboard'
+    | '/log-in'
     | '/sign-up'
     | '/company/dashboard'
     | '/demo/tanstack-query'
   id:
     | '__root__'
     | '/'
+    | '/$workspace'
     | '/_pathlessLayout'
     | '/company'
+    | '/$workspace/dashboard'
+    | '/_pathlessLayout/log-in'
     | '/_pathlessLayout/sign-up'
     | '/company/dashboard'
     | '/demo/tanstack-query'
@@ -187,6 +261,7 @@ export interface FileRouteTypes {
 
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  WorkspaceRouteRoute: typeof WorkspaceRouteRouteWithChildren
   PathlessLayoutRouteRoute: typeof PathlessLayoutRouteRouteWithChildren
   CompanyRouteRoute: typeof CompanyRouteRouteWithChildren
   DemoTanstackQueryRoute: typeof DemoTanstackQueryRoute
@@ -194,6 +269,7 @@ export interface RootRouteChildren {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  WorkspaceRouteRoute: WorkspaceRouteRouteWithChildren,
   PathlessLayoutRouteRoute: PathlessLayoutRouteRouteWithChildren,
   CompanyRouteRoute: CompanyRouteRouteWithChildren,
   DemoTanstackQueryRoute: DemoTanstackQueryRoute,
@@ -210,6 +286,7 @@ export const routeTree = rootRoute
       "filePath": "__root.tsx",
       "children": [
         "/",
+        "/$workspace",
         "/_pathlessLayout",
         "/company",
         "/demo/tanstack-query"
@@ -218,9 +295,16 @@ export const routeTree = rootRoute
     "/": {
       "filePath": "index.tsx"
     },
+    "/$workspace": {
+      "filePath": "$workspace/route.tsx",
+      "children": [
+        "/$workspace/dashboard"
+      ]
+    },
     "/_pathlessLayout": {
       "filePath": "_pathlessLayout/route.tsx",
       "children": [
+        "/_pathlessLayout/log-in",
         "/_pathlessLayout/sign-up"
       ]
     },
@@ -229,6 +313,14 @@ export const routeTree = rootRoute
       "children": [
         "/company/dashboard"
       ]
+    },
+    "/$workspace/dashboard": {
+      "filePath": "$workspace/dashboard.tsx",
+      "parent": "/$workspace"
+    },
+    "/_pathlessLayout/log-in": {
+      "filePath": "_pathlessLayout/log-in.tsx",
+      "parent": "/_pathlessLayout"
     },
     "/_pathlessLayout/sign-up": {
       "filePath": "_pathlessLayout/sign-up.tsx",

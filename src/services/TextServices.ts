@@ -105,3 +105,12 @@ export function isDeepEqual<T>(a: T, b: T): boolean {
     return isDeepEqual(a[key], b[key]);
   });
 }
+
+export function slugifyCompanyName(name: string): string {
+  return name
+    .trim()
+    .toLowerCase()
+    .replace(/[^a-z0-9\s-]/g, '')
+    .replace(/\s+/g, '-')
+    .replace(/-+/g, '-');
+}

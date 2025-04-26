@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { createFileRoute } from '@tanstack/react-router';
+import { createFileRoute, Link } from '@tanstack/react-router';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
@@ -9,6 +9,10 @@ import SelectField from '@/components/global/form/SelectField';
 import { Button } from '@/components/ui/button';
 import { signUpSchema } from '@/validation/auth.validation';
 import { ArrowLeft } from 'lucide-react';
+import { toast } from 'sonner';
+import CloseToast from '@/components/global/CloseToast';
+import { slugifyCompanyName } from '@/services/TextServices';
+import useWindowProperties from '@/hooks/useWindowProperties';
 
 
 type FormValues = yup.InferType<typeof signUpSchema>;
@@ -28,6 +32,7 @@ export default function RouteComponent() {
     formState: { errors },
     trigger,
     setValue,
+    getValues,
     watch,
   } = useForm<FormValues>({
     resolver: yupResolver(signUpSchema),
@@ -37,7 +42,7 @@ export default function RouteComponent() {
     }
   });
 
-  const intendedUserValue = watch('intendedUser');
+  const [intendedUserValue, workspaceName] = watch(['intendedUser', 'workspaceName']);
 
   const intentionOptions = [
     { label: 'Business Owner', value: 'Business Owner' },
@@ -48,36 +53,42 @@ export default function RouteComponent() {
 
   const onNext = async () => {
     const valid = await trigger(['email', 'password', 'password_confirmation', 'companyName']);
-    if (valid) setStep(2);
+    if (valid) {
+      setValue("workspaceName",
+        slugifyCompanyName(getValues("companyName"))
+      )
+      setStep(2)
+    };
   };
 
   const onBack = () => setStep(1);
 
-  const onSubmit = (data: FormValues) => {
+  const onSubmit = (_data: FormValues) => {
     if (step === 1) {
       onNext()
       return
     }
+    toast.success("Sign Up success", { action: <CloseToast /> })
     // TODO: submit registration
-    console.log('Submitting', data);
   };
+
+  const { baseUrl } = useWindowProperties({})
 
   return (
     <div className="mt-6 max-w-[700px]">
       {/* Progress Bar */}
-      <div className="w-full h-2 bg-gray-200 rounded mb-6">
-        <div
-          className={`h-2 rounded bg-main transition-width duration-300 ${step === 1 ? 'w-1/2' : 'w-full'
-            }`}
-        />
+      <span className="text-gray-700 font-medium text-[20px] inline-block mb-2">
+        Step {step}/2
+      </span>
+      <div className="w-full h-2 bg-gray-200 rounded mb-6 relative">
+        <div className={`h-2 rounded relative bg-main transition-width duration-300 ${step === 1 ? 'w-1/2' : 'w-full'}`} />
       </div>
-
       <form onSubmit={handleSubmit(onSubmit)} className='pb-5 flex flex-col gap-4'>
-        <h1 className="text-2xl sm:text-4xl mb-4 text-gray-700">Sign Up</h1>
+        <h1 className="text-2xl sm:text-4xl mb-4 text-gray-700">Let's Get Started</h1>
         {
           step === 2 && (
-            <div className="w-full justify-start group">
-              <Button type='button' onClick={onBack} variant={"ghost"} className='bg-transparent text-gray-700 px-2 cursor-pointer'>
+            <div className="w-full justify-start">
+              <Button type='button' onClick={onBack} variant={"ghost"} className='bg-transparent text-gray-700 px-2 cursor-pointer group'>
                 <ArrowLeft className='text-lg group-hover:-translate-x-1 shrink-0 transition-all duration-300' />
                 Back
               </Button>
@@ -93,7 +104,6 @@ export default function RouteComponent() {
               error={errors.email?.message}
               type="email"
             />
-
             <InputField
               fieldName="password"
               labelText="Password"
@@ -122,7 +132,7 @@ export default function RouteComponent() {
             />
             <Button
               size={"lg"}
-              className='w-full mt-8 flex items-center'
+              className='w-full mt-6 h-14 flex items-center'
               onClick={onNext}
             >
               Next
@@ -138,6 +148,15 @@ export default function RouteComponent() {
               register={register}
               error={errors.workspaceName?.message}
             />
+            <p className='inline-block relative -top-5'>
+              <span> Workspace will be at : </span>
+              <span className="block w-fit shadow-sm border px-2 mt-1 rounded-lg py-[20x] bg-gray-100 border-gray-200">
+                {
+                  baseUrl + "/" +
+                  slugifyCompanyName(workspaceName)
+                }
+              </span>
+            </p>
 
             <InputField
               fieldName="businessName"
@@ -164,13 +183,18 @@ export default function RouteComponent() {
 
             <Button
               size={"lg"}
-              className='w-full mt-8 flex items-center'
+              className='w-full mt-6 flex items-center h-14'
               type="submit">
               Submit
             </Button>
           </>
         )}
       </form>
+      <p className="text-center mt-2">
+        Already have an account?
+        {' '}
+        <Link to="/log-in" className="text-main">Log in Here</Link>
+      </p>
     </div>
   );
 }
