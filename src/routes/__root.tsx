@@ -13,7 +13,7 @@ interface MyRouterContext {
 
 export const Route = createRootRouteWithContext<MyRouterContext>()({
   component: () => (
-    <div className='max-w-[1600px] mx-auto bg-amber-50 min-h-screen'>
+    <div className='max-w-[1600px] mx-auto min-h-screen'>
       <Outlet />
       <Toaster />
       <TanStackRouterDevtools />

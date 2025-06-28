@@ -18,7 +18,7 @@ function PathlessLayoutComponent() {
   };
 
   return (
-    <div className="flex md:max-h-screen max-sm:px-2 p-4">
+    <div className="flex md:max-h-screen max-sm:px-2 p-4 bg-amber-50 ">
       <div className="hidden rounded-l-lg h-full overflow-hidden md:block md:w-2/5 lg:w-4/9 relative">
         <Carousel
           showThumbs={false}
