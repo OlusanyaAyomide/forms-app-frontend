@@ -42,21 +42,23 @@ export default function AppSideBar() {
                   <SidebarMenuItem key={`${index + 1}-${idx + 1}`.toString()} className="mb-1 py-2 relative">
                     {isActive && <div className="absolute left-0 top-1/2 -translate-y-1/2 h-8 w-1 bg-main" />}
                     <SidebarMenuButton className={`${open ? "h-12" : "h-20"}`}>
-                      <Tooltip>
-                        <TooltipTrigger asChild>
-                          <Link to={menuLink} className={`flex items-center gap-2 ${isActive ? "text-main" : "text-black"}`}>
-                            <span><menuItem.icon className="text-[22px] font-semibold" /></span>
-                            {open && (
-                              <span>{menuItem.text}</span>
-                            )}
-                          </Link>
-                        </TooltipTrigger>
-                        {!open && (
+                      {open ? (
+                        <Link to={menuLink} className={`flex items-center gap-2 ${isActive ? "text-main" : "text-black"}`}>
+                          <span><menuItem.icon className="text-[22px] font-semibold" /></span>
+                          <span>{menuItem.text}</span>
+                        </Link>
+                      ) : (
+                        <Tooltip key={menuLink}>
+                          <TooltipTrigger asChild>
+                            <Link to={menuLink} className={`flex items-center gap-2 ${isActive ? "text-main" : "text-black"}`}>
+                              <span><menuItem.icon className="text-[22px] font-semibold" /></span>
+                            </Link>
+                          </TooltipTrigger>
                           <TooltipContent side="right" sideOffset={15}>
                             <p>{menuItem.text}</p>
                           </TooltipContent>
-                        )}
-                      </Tooltip>
+                        </Tooltip>
+                      )}
                     </SidebarMenuButton>
                   </SidebarMenuItem>
                 );

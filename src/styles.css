@@ -21,6 +21,7 @@ code {
 :root {
   --background: oklch(1 0 0);
   --main: #690896;
+  --secondary: #F2F2F2;
   --main-hover: #310445;
   --asc-black: #000000;
   --asc-gray: #48464C;
@@ -104,6 +105,7 @@ code {
 
 @theme inline {
   --color-main: var(--main);
+  --color-secondary: var(--secondary);
   --color-main-hover: var(--main-hover);
   --color-asc-black: var(--asc-black);
   --color-asc-gray: var(--asc-gray);
