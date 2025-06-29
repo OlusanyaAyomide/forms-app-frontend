@@ -19,12 +19,12 @@ import { Route as DemoTanstackQueryImport } from './routes/demo.tanstack-query'
 import { Route as CompanyDashboardImport } from './routes/company/dashboard'
 import { Route as PathlessLayoutSignUpImport } from './routes/_pathlessLayout/sign-up'
 import { Route as PathlessLayoutLogInImport } from './routes/_pathlessLayout/log-in'
-import { Route as WorkspaceSettingsImport } from './routes/$workspace/settings'
-import { Route as WorkspaceQuizImport } from './routes/$workspace/quiz'
-import { Route as WorkspaceQuestionsImport } from './routes/$workspace/questions'
-import { Route as WorkspaceFormsImport } from './routes/$workspace/forms'
-import { Route as WorkspaceDashboardImport } from './routes/$workspace/dashboard'
-import { Route as WorkspaceAnalyticsImport } from './routes/$workspace/analytics'
+import { Route as WorkspaceAdminSettingsImport } from './routes/$workspace/admin/settings'
+import { Route as WorkspaceAdminQuizImport } from './routes/$workspace/admin/quiz'
+import { Route as WorkspaceAdminQuestionsImport } from './routes/$workspace/admin/questions'
+import { Route as WorkspaceAdminFormsImport } from './routes/$workspace/admin/forms'
+import { Route as WorkspaceAdminDashboardImport } from './routes/$workspace/admin/dashboard'
+import { Route as WorkspaceAdminAnalyticsImport } from './routes/$workspace/admin/analytics'
 
 // Create/Update Routes
 
@@ -75,39 +75,39 @@ const PathlessLayoutLogInRoute = PathlessLayoutLogInImport.update({
   getParentRoute: () => PathlessLayoutRouteRoute,
 } as any)
 
-const WorkspaceSettingsRoute = WorkspaceSettingsImport.update({
-  id: '/settings',
-  path: '/settings',
+const WorkspaceAdminSettingsRoute = WorkspaceAdminSettingsImport.update({
+  id: '/admin/settings',
+  path: '/admin/settings',
   getParentRoute: () => WorkspaceRouteRoute,
 } as any)
 
-const WorkspaceQuizRoute = WorkspaceQuizImport.update({
-  id: '/quiz',
-  path: '/quiz',
+const WorkspaceAdminQuizRoute = WorkspaceAdminQuizImport.update({
+  id: '/admin/quiz',
+  path: '/admin/quiz',
   getParentRoute: () => WorkspaceRouteRoute,
 } as any)
 
-const WorkspaceQuestionsRoute = WorkspaceQuestionsImport.update({
-  id: '/questions',
-  path: '/questions',
+const WorkspaceAdminQuestionsRoute = WorkspaceAdminQuestionsImport.update({
+  id: '/admin/questions',
+  path: '/admin/questions',
   getParentRoute: () => WorkspaceRouteRoute,
 } as any)
 
-const WorkspaceFormsRoute = WorkspaceFormsImport.update({
-  id: '/forms',
-  path: '/forms',
+const WorkspaceAdminFormsRoute = WorkspaceAdminFormsImport.update({
+  id: '/admin/forms',
+  path: '/admin/forms',
   getParentRoute: () => WorkspaceRouteRoute,
 } as any)
 
-const WorkspaceDashboardRoute = WorkspaceDashboardImport.update({
-  id: '/dashboard',
-  path: '/dashboard',
+const WorkspaceAdminDashboardRoute = WorkspaceAdminDashboardImport.update({
+  id: '/admin/dashboard',
+  path: '/admin/dashboard',
   getParentRoute: () => WorkspaceRouteRoute,
 } as any)
 
-const WorkspaceAnalyticsRoute = WorkspaceAnalyticsImport.update({
-  id: '/analytics',
-  path: '/analytics',
+const WorkspaceAdminAnalyticsRoute = WorkspaceAdminAnalyticsImport.update({
+  id: '/admin/analytics',
+  path: '/admin/analytics',
   getParentRoute: () => WorkspaceRouteRoute,
 } as any)
 
@@ -143,48 +143,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof CompanyRouteImport
       parentRoute: typeof rootRoute
     }
-    '/$workspace/analytics': {
-      id: '/$workspace/analytics'
-      path: '/analytics'
-      fullPath: '/$workspace/analytics'
-      preLoaderRoute: typeof WorkspaceAnalyticsImport
-      parentRoute: typeof WorkspaceRouteImport
-    }
-    '/$workspace/dashboard': {
-      id: '/$workspace/dashboard'
-      path: '/dashboard'
-      fullPath: '/$workspace/dashboard'
-      preLoaderRoute: typeof WorkspaceDashboardImport
-      parentRoute: typeof WorkspaceRouteImport
-    }
-    '/$workspace/forms': {
-      id: '/$workspace/forms'
-      path: '/forms'
-      fullPath: '/$workspace/forms'
-      preLoaderRoute: typeof WorkspaceFormsImport
-      parentRoute: typeof WorkspaceRouteImport
-    }
-    '/$workspace/questions': {
-      id: '/$workspace/questions'
-      path: '/questions'
-      fullPath: '/$workspace/questions'
-      preLoaderRoute: typeof WorkspaceQuestionsImport
-      parentRoute: typeof WorkspaceRouteImport
-    }
-    '/$workspace/quiz': {
-      id: '/$workspace/quiz'
-      path: '/quiz'
-      fullPath: '/$workspace/quiz'
-      preLoaderRoute: typeof WorkspaceQuizImport
-      parentRoute: typeof WorkspaceRouteImport
-    }
-    '/$workspace/settings': {
-      id: '/$workspace/settings'
-      path: '/settings'
-      fullPath: '/$workspace/settings'
-      preLoaderRoute: typeof WorkspaceSettingsImport
-      parentRoute: typeof WorkspaceRouteImport
-    }
     '/_pathlessLayout/log-in': {
       id: '/_pathlessLayout/log-in'
       path: '/log-in'
@@ -213,27 +171,69 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof DemoTanstackQueryImport
       parentRoute: typeof rootRoute
     }
+    '/$workspace/admin/analytics': {
+      id: '/$workspace/admin/analytics'
+      path: '/admin/analytics'
+      fullPath: '/$workspace/admin/analytics'
+      preLoaderRoute: typeof WorkspaceAdminAnalyticsImport
+      parentRoute: typeof WorkspaceRouteImport
+    }
+    '/$workspace/admin/dashboard': {
+      id: '/$workspace/admin/dashboard'
+      path: '/admin/dashboard'
+      fullPath: '/$workspace/admin/dashboard'
+      preLoaderRoute: typeof WorkspaceAdminDashboardImport
+      parentRoute: typeof WorkspaceRouteImport
+    }
+    '/$workspace/admin/forms': {
+      id: '/$workspace/admin/forms'
+      path: '/admin/forms'
+      fullPath: '/$workspace/admin/forms'
+      preLoaderRoute: typeof WorkspaceAdminFormsImport
+      parentRoute: typeof WorkspaceRouteImport
+    }
+    '/$workspace/admin/questions': {
+      id: '/$workspace/admin/questions'
+      path: '/admin/questions'
+      fullPath: '/$workspace/admin/questions'
+      preLoaderRoute: typeof WorkspaceAdminQuestionsImport
+      parentRoute: typeof WorkspaceRouteImport
+    }
+    '/$workspace/admin/quiz': {
+      id: '/$workspace/admin/quiz'
+      path: '/admin/quiz'
+      fullPath: '/$workspace/admin/quiz'
+      preLoaderRoute: typeof WorkspaceAdminQuizImport
+      parentRoute: typeof WorkspaceRouteImport
+    }
+    '/$workspace/admin/settings': {
+      id: '/$workspace/admin/settings'
+      path: '/admin/settings'
+      fullPath: '/$workspace/admin/settings'
+      preLoaderRoute: typeof WorkspaceAdminSettingsImport
+      parentRoute: typeof WorkspaceRouteImport
+    }
   }
 }
 
 // Create and export the route tree
 
 interface WorkspaceRouteRouteChildren {
-  WorkspaceAnalyticsRoute: typeof WorkspaceAnalyticsRoute
-  WorkspaceDashboardRoute: typeof WorkspaceDashboardRoute
-  WorkspaceFormsRoute: typeof WorkspaceFormsRoute
-  WorkspaceQuestionsRoute: typeof WorkspaceQuestionsRoute
-  WorkspaceQuizRoute: typeof WorkspaceQuizRoute
-  WorkspaceSettingsRoute: typeof WorkspaceSettingsRoute
+  WorkspaceAdminAnalyticsRoute: typeof WorkspaceAdminAnalyticsRoute
+  WorkspaceAdminDashboardRoute: typeof WorkspaceAdminDashboardRoute
+  WorkspaceAdminFormsRoute: typeof WorkspaceAdminFormsRoute
+  WorkspaceAdminQuestionsRoute: typeof WorkspaceAdminQuestionsRoute
+  WorkspaceAdminQuizRoute: typeof WorkspaceAdminQuizRoute
+  WorkspaceAdminSettingsRoute: typeof WorkspaceAdminSettingsRoute
 }
 
 const WorkspaceRouteRouteChildren: WorkspaceRouteRouteChildren = {
-  WorkspaceAnalyticsRoute: WorkspaceAnalyticsRoute,
-  WorkspaceDashboardRoute: WorkspaceDashboardRoute,
-  WorkspaceFormsRoute: WorkspaceFormsRoute,
-  WorkspaceQuestionsRoute: WorkspaceQuestionsRoute,
-  WorkspaceQuizRoute: WorkspaceQuizRoute,
-  WorkspaceSettingsRoute: WorkspaceSettingsRoute,
+  WorkspaceAdminAnalyticsRoute: WorkspaceAdminAnalyticsRoute,
+  WorkspaceAdminDashboardRoute: WorkspaceAdminDashboardRoute,
+  WorkspaceAdminFormsRoute: WorkspaceAdminFormsRoute,
+  WorkspaceAdminQuestionsRoute: WorkspaceAdminQuestionsRoute,
+  WorkspaceAdminQuizRoute: WorkspaceAdminQuizRoute,
+  WorkspaceAdminSettingsRoute: WorkspaceAdminSettingsRoute,
 }
 
 const WorkspaceRouteRouteWithChildren = WorkspaceRouteRoute._addFileChildren(
@@ -270,16 +270,16 @@ export interface FileRoutesByFullPath {
   '/$workspace': typeof WorkspaceRouteRouteWithChildren
   '': typeof PathlessLayoutRouteRouteWithChildren
   '/company': typeof CompanyRouteRouteWithChildren
-  '/$workspace/analytics': typeof WorkspaceAnalyticsRoute
-  '/$workspace/dashboard': typeof WorkspaceDashboardRoute
-  '/$workspace/forms': typeof WorkspaceFormsRoute
-  '/$workspace/questions': typeof WorkspaceQuestionsRoute
-  '/$workspace/quiz': typeof WorkspaceQuizRoute
-  '/$workspace/settings': typeof WorkspaceSettingsRoute
   '/log-in': typeof PathlessLayoutLogInRoute
   '/sign-up': typeof PathlessLayoutSignUpRoute
   '/company/dashboard': typeof CompanyDashboardRoute
   '/demo/tanstack-query': typeof DemoTanstackQueryRoute
+  '/$workspace/admin/analytics': typeof WorkspaceAdminAnalyticsRoute
+  '/$workspace/admin/dashboard': typeof WorkspaceAdminDashboardRoute
+  '/$workspace/admin/forms': typeof WorkspaceAdminFormsRoute
+  '/$workspace/admin/questions': typeof WorkspaceAdminQuestionsRoute
+  '/$workspace/admin/quiz': typeof WorkspaceAdminQuizRoute
+  '/$workspace/admin/settings': typeof WorkspaceAdminSettingsRoute
 }
 
 export interface FileRoutesByTo {
@@ -287,16 +287,16 @@ export interface FileRoutesByTo {
   '/$workspace': typeof WorkspaceRouteRouteWithChildren
   '': typeof PathlessLayoutRouteRouteWithChildren
   '/company': typeof CompanyRouteRouteWithChildren
-  '/$workspace/analytics': typeof WorkspaceAnalyticsRoute
-  '/$workspace/dashboard': typeof WorkspaceDashboardRoute
-  '/$workspace/forms': typeof WorkspaceFormsRoute
-  '/$workspace/questions': typeof WorkspaceQuestionsRoute
-  '/$workspace/quiz': typeof WorkspaceQuizRoute
-  '/$workspace/settings': typeof WorkspaceSettingsRoute
   '/log-in': typeof PathlessLayoutLogInRoute
   '/sign-up': typeof PathlessLayoutSignUpRoute
   '/company/dashboard': typeof CompanyDashboardRoute
   '/demo/tanstack-query': typeof DemoTanstackQueryRoute
+  '/$workspace/admin/analytics': typeof WorkspaceAdminAnalyticsRoute
+  '/$workspace/admin/dashboard': typeof WorkspaceAdminDashboardRoute
+  '/$workspace/admin/forms': typeof WorkspaceAdminFormsRoute
+  '/$workspace/admin/questions': typeof WorkspaceAdminQuestionsRoute
+  '/$workspace/admin/quiz': typeof WorkspaceAdminQuizRoute
+  '/$workspace/admin/settings': typeof WorkspaceAdminSettingsRoute
 }
 
 export interface FileRoutesById {
@@ -305,16 +305,16 @@ export interface FileRoutesById {
   '/$workspace': typeof WorkspaceRouteRouteWithChildren
   '/_pathlessLayout': typeof PathlessLayoutRouteRouteWithChildren
   '/company': typeof CompanyRouteRouteWithChildren
-  '/$workspace/analytics': typeof WorkspaceAnalyticsRoute
-  '/$workspace/dashboard': typeof WorkspaceDashboardRoute
-  '/$workspace/forms': typeof WorkspaceFormsRoute
-  '/$workspace/questions': typeof WorkspaceQuestionsRoute
-  '/$workspace/quiz': typeof WorkspaceQuizRoute
-  '/$workspace/settings': typeof WorkspaceSettingsRoute
   '/_pathlessLayout/log-in': typeof PathlessLayoutLogInRoute
   '/_pathlessLayout/sign-up': typeof PathlessLayoutSignUpRoute
   '/company/dashboard': typeof CompanyDashboardRoute
   '/demo/tanstack-query': typeof DemoTanstackQueryRoute
+  '/$workspace/admin/analytics': typeof WorkspaceAdminAnalyticsRoute
+  '/$workspace/admin/dashboard': typeof WorkspaceAdminDashboardRoute
+  '/$workspace/admin/forms': typeof WorkspaceAdminFormsRoute
+  '/$workspace/admin/questions': typeof WorkspaceAdminQuestionsRoute
+  '/$workspace/admin/quiz': typeof WorkspaceAdminQuizRoute
+  '/$workspace/admin/settings': typeof WorkspaceAdminSettingsRoute
 }
 
 export interface FileRouteTypes {
@@ -324,48 +324,48 @@ export interface FileRouteTypes {
     | '/$workspace'
     | ''
     | '/company'
-    | '/$workspace/analytics'
-    | '/$workspace/dashboard'
-    | '/$workspace/forms'
-    | '/$workspace/questions'
-    | '/$workspace/quiz'
-    | '/$workspace/settings'
     | '/log-in'
     | '/sign-up'
     | '/company/dashboard'
     | '/demo/tanstack-query'
+    | '/$workspace/admin/analytics'
+    | '/$workspace/admin/dashboard'
+    | '/$workspace/admin/forms'
+    | '/$workspace/admin/questions'
+    | '/$workspace/admin/quiz'
+    | '/$workspace/admin/settings'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
     | '/$workspace'
     | ''
     | '/company'
-    | '/$workspace/analytics'
-    | '/$workspace/dashboard'
-    | '/$workspace/forms'
-    | '/$workspace/questions'
-    | '/$workspace/quiz'
-    | '/$workspace/settings'
     | '/log-in'
     | '/sign-up'
     | '/company/dashboard'
     | '/demo/tanstack-query'
+    | '/$workspace/admin/analytics'
+    | '/$workspace/admin/dashboard'
+    | '/$workspace/admin/forms'
+    | '/$workspace/admin/questions'
+    | '/$workspace/admin/quiz'
+    | '/$workspace/admin/settings'
   id:
     | '__root__'
     | '/'
     | '/$workspace'
     | '/_pathlessLayout'
     | '/company'
-    | '/$workspace/analytics'
-    | '/$workspace/dashboard'
-    | '/$workspace/forms'
-    | '/$workspace/questions'
-    | '/$workspace/quiz'
-    | '/$workspace/settings'
     | '/_pathlessLayout/log-in'
     | '/_pathlessLayout/sign-up'
     | '/company/dashboard'
     | '/demo/tanstack-query'
+    | '/$workspace/admin/analytics'
+    | '/$workspace/admin/dashboard'
+    | '/$workspace/admin/forms'
+    | '/$workspace/admin/questions'
+    | '/$workspace/admin/quiz'
+    | '/$workspace/admin/settings'
   fileRoutesById: FileRoutesById
 }
 
@@ -408,12 +408,12 @@ export const routeTree = rootRoute
     "/$workspace": {
       "filePath": "$workspace/route.tsx",
       "children": [
-        "/$workspace/analytics",
-        "/$workspace/dashboard",
-        "/$workspace/forms",
-        "/$workspace/questions",
-        "/$workspace/quiz",
-        "/$workspace/settings"
+        "/$workspace/admin/analytics",
+        "/$workspace/admin/dashboard",
+        "/$workspace/admin/forms",
+        "/$workspace/admin/questions",
+        "/$workspace/admin/quiz",
+        "/$workspace/admin/settings"
       ]
     },
     "/_pathlessLayout": {
@@ -429,30 +429,6 @@ export const routeTree = rootRoute
         "/company/dashboard"
       ]
     },
-    "/$workspace/analytics": {
-      "filePath": "$workspace/analytics.tsx",
-      "parent": "/$workspace"
-    },
-    "/$workspace/dashboard": {
-      "filePath": "$workspace/dashboard.tsx",
-      "parent": "/$workspace"
-    },
-    "/$workspace/forms": {
-      "filePath": "$workspace/forms.tsx",
-      "parent": "/$workspace"
-    },
-    "/$workspace/questions": {
-      "filePath": "$workspace/questions.tsx",
-      "parent": "/$workspace"
-    },
-    "/$workspace/quiz": {
-      "filePath": "$workspace/quiz.tsx",
-      "parent": "/$workspace"
-    },
-    "/$workspace/settings": {
-      "filePath": "$workspace/settings.tsx",
-      "parent": "/$workspace"
-    },
     "/_pathlessLayout/log-in": {
       "filePath": "_pathlessLayout/log-in.tsx",
       "parent": "/_pathlessLayout"
@@ -467,6 +443,30 @@ export const routeTree = rootRoute
     },
     "/demo/tanstack-query": {
       "filePath": "demo.tanstack-query.tsx"
+    },
+    "/$workspace/admin/analytics": {
+      "filePath": "$workspace/admin/analytics.tsx",
+      "parent": "/$workspace"
+    },
+    "/$workspace/admin/dashboard": {
+      "filePath": "$workspace/admin/dashboard.tsx",
+      "parent": "/$workspace"
+    },
+    "/$workspace/admin/forms": {
+      "filePath": "$workspace/admin/forms.tsx",
+      "parent": "/$workspace"
+    },
+    "/$workspace/admin/questions": {
+      "filePath": "$workspace/admin/questions.tsx",
+      "parent": "/$workspace"
+    },
+    "/$workspace/admin/quiz": {
+      "filePath": "$workspace/admin/quiz.tsx",
+      "parent": "/$workspace"
+    },
+    "/$workspace/admin/settings": {
+      "filePath": "$workspace/admin/settings.tsx",
+      "parent": "/$workspace"
     }
   }
 }

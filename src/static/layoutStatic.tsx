@@ -8,7 +8,7 @@ export const sideBarItems = [
     title: "Overview",
     items: [
       {
-        link: "/dashboard",
+        link: "/admin/dashboard",
         icon: Grid2X2,
         text: "Dashboard"
       },
@@ -18,17 +18,17 @@ export const sideBarItems = [
     title: "Products",
     items: [
       {
-        link: "/quiz",
+        link: "/admin/quiz",
         icon: BookOpenText,
         text: "Quiz"
       },
       {
-        link: "/forms",
+        link: "/admin/forms",
         icon: ClipboardList,
-        text: "ClipboardList "
+        text: "Forms "
       },
       {
-        link: "/questions",
+        link: "/admin/questions",
         icon: Archive,
         text: "Question Bank"
       },
@@ -38,12 +38,12 @@ export const sideBarItems = [
     title: "Management",
     items: [
       {
-        link: "/analytics",
+        link: "/admin/analytics",
         icon: ChartNoAxesCombined,
         text: "Analytics"
       },
       {
-        link: "/settings",
+        link: "/admin/settings",
         icon: Settings,
         text: "Settings"
       },
