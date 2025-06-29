@@ -1,5 +1,5 @@
 import { Outlet, createRootRouteWithContext } from '@tanstack/react-router'
-import { TanStackRouterDevtools } from '@tanstack/react-router-devtools'
+// import { TanStackRouterDevtools } from '@tanstack/react-router-devtools'
 
 import TanstackQueryLayout from '../integrations/tanstack-query/layout'
 
@@ -16,7 +16,7 @@ export const Route = createRootRouteWithContext<MyRouterContext>()({
     <div className='max-w-[1600px] mx-auto min-h-screen'>
       <Outlet />
       <Toaster />
-      <TanStackRouterDevtools />
+      {/* <TanStackRouterDevtools /> */}
       <TanstackQueryLayout />
       <TailwindIndicator />
     </div>
